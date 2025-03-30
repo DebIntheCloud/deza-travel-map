@@ -1,13 +1,6 @@
 // Initialize the map
 var map = L.map('mapid').setView([42.5699, -8.1529], 13);  // Deza County coordinates
 
-// Add tile layer (the actual map tiles)
-// Reemplaza 'YOUR_API_KEY' con tu API Key de Mapbox
-// L.tileLayer('https://api.mapbox.com/styles/v1/debinthecloud/cm8nnfmgy001m01snd2n13rzw/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGViaW50aGVjbG91ZCIsImEiOiJjbThubXo3OHMwMmhjMnFwenZhZjBjeGJjIn0.ChufihB7e2hnT9dB1nn1cQ', {
-//     //attribution: '&copy; <a href="https://www.mapbox.com/about/maps/">Mapbox</a> contributors'
-// }).addTo(map);
-
-
 // Add a marker (shows deza boundaries)
 var marker = L.marker([42.5699, -8.1529]).addTo(map);
 
