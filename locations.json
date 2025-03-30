@@ -1,0 +1,40 @@
+{
+    "hotels": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-8.151, 42.57]
+        },
+        "properties": {
+          "name": "Hotel 1",
+          "category": "Accommodation"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-8.16, 42.58]
+        },
+        "properties": {
+          "name": "Hotel 2",
+          "category": "Accommodation"
+        }
+      }
+    ],
+    "museums": [
+      {
+        "type": "Feature",
+        "geometry": {
+          "type": "Point",
+          "coordinates": [-8.17, 42.59]
+        },
+        "properties": {
+          "name": "Museum 1",
+          "category": "Culture"
+        }
+      }
+    ]
+  }
+  
