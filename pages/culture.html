@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspiration - Culture</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white p-6">
+<header></header>  <!-- This will be replaced by header.html -->
+<main>
+    <div class="max-w-6xl mx-auto">
+        <div class="flex justify-start mt-16">
+            <div class="w-2/3">
+                <h2 class="text-4xl font-bold mb-6 text-gray-800 mt-16 font-family: 'Segoe UI', sans-serif;">ART & CULTURE IN DEZA</h2>
+                    <p class="text-2xl font-family: 'Neausa', sans-serif; mb-6 text-gray-800 mt-4">Deza County’s unique landscape, strong community bonds, and enterprising spirit have fostered a rich and dynamic cultural scene. From age-old traditions to contemporary artistic expressions, the people of Deza are deeply creative—writing, performing, composing, crafting, painting, sculpting, and more. Many locals are engaged in creative professions, while others find joy in playing traditional music, reciting poetry, designing textiles, or preserving the region’s artisanal heritage.
+
+                        Here’s a glimpse into Deza County’s vibrant cultural scene..</p>
+                </div>
+            </div>
+            <!-- Add margin-top for 1 inch space -->
+            <div class="grid grid-cols-1 gap-6 mt-16 mb-32" id="activityGrid"></div>
+        </div>
+    </main>
+<footer></footer>  <!-- This will be replaced by footer.html -->
+<script>
+
+        // Load the header.html file dynamically
+        fetch('../partials/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.querySelector('header').innerHTML = data;
+        });
+
+            // Load the footer.html file dynamically
+        fetch('../partials/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.querySelector('footer').innerHTML = data;
+        });
+
+    const activities = [
+        { title: "CARNIVAL IN DEZA - A GREAT TIME TO VISIT", description: "Experience the magic of Deza’s Carnival, where the streets come alive with vibrant festivals, playful charades, and the beloved Vermut das Señoritas. Join the crowds in dazzling costumes, revel in nonstop celebrations, and indulge in seasonal treats and baked goods found only at this time of year. Don’t miss Lalín’s famous Festa do Cocido, the ultimate feast that brings everyone together in a true spectacle of tradition and flavor!", image: "../images/cocido festa.jpg" },
+        { title: "LGBT+ TRAVEL IN DEZA", description: "A Celebration of Diversity and Tradition! Lalín proudly embraces the LGBTQ+ community with the Cocido do Orgullo, a vibrant event that blends inclusivity with the town’s rich gastronomic heritage. This special gathering brings people together to enjoy the iconic Galician cocido in a festive, welcoming atmosphere, highlighting Deza County’s commitment to diversity, acceptance, and joy for all..", image: "../images/COCIDO GAY.jpg" },
+        { title: "MUSEUMS FOR ALL TASTES! ", description: "Deza County offers a rich museum experience, from the Rural Life Museum, showcasing traditional Galician life, to the whimsical Puppets Museum, celebrating local theatrical arts. The Museo Aller features the historic Observatory Tower, once used by the famous astronomer Ramón María Aller Ulloa. These museums offer a perfect mix of history, culture, and science for all visitors.", image: "../images/MUSEO MARIONETAS.jpg" },
+        { title: "ARTS AND CULTURE IN DEZA", description: "Deza County comes alive with festivals and live music throughout the summer, offering a vibrant mix of events in various locations. From traditional festivals celebrating local culture to captivating theater performances and puppet shows, there’s something for everyone. The region pulses with rhythm, showcasing the best of Galicia’s musical and artistic heritage in an unforgettable summer atmosphere.", image: "../images/ORQUESTA.jpg" }
+    ];
+    
+    //code dynamically creates and inserts activity cards into the #activityGrid div
+    const grid = document.getElementById("activityGrid"); //Finds the HTML element with the ID activityGrid, which is where the activity cards will be placed.
+    activities.forEach(activity => { //Iterates over the activities array, where each object contains a title, description, and image.
+        const card = document.createElement("div"); //Creates a new <div> element to serve as the card container.
+        card.classList.add("flex", "items-start", "hover:shadow-lg", "transition", "duration-300", "p-4"); //Applies Tailwind CSS classes to style the card with a white background, rounded corners, shadows, and a hover effect.
+        card.innerHTML = `
+            <img src="${activity.image}" alt="${activity.title}" class="w-96 h-64 rounded object-cover mr-8">
+            <div class="p-4">
+                <h3 class="text-3xl font-bold text-gray-900">${activity.title}</h3>
+                <p class="text-xl text-gray-800 text-sm mt-2">${activity.description}</p>
+            </div>
+        `;
+        grid.appendChild(card); //Inserts the newly created card inside the #activityGrid div, displaying it on the page.
+    });
+</script>
+</body>
+</html>

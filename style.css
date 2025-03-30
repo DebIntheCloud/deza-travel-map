@@ -1,3 +1,4 @@
+/* Body and layout */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -7,9 +8,285 @@ body {
     align-items: center;
     height: 100vh;
     background-color: #f0f0f0;
+    overflow-x: hidden;  /* Prevent horizontal scrolling */
 }
 
+
+/* Map container */
 #mapid {
     width: 100%;
-    height: 600px;
+    height: 100vh; /* Make the map take up the full height of the screen */
+    max-width: 100%;  /* Prevents the map from exceeding the container width */
 }
+
+/* Search bar container */
+#searchContainer {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 8px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    font-family: 'Neausa', sans-serif;  /* Apply Neausa font */
+}
+
+/* Marker icon inside search bar */
+#markerIcon {
+    font-size: 20px;
+    margin-right: 8px;
+    color: #2e3d4e;
+}
+
+/* Search input field */
+#searchInput {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 6px;
+    width: 250px;
+    background-color: transparent;
+}
+
+/* Icon container (top-right of the map) */
+#icon-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 20px;
+    z-index: 1000;
+}
+
+/* Icon button style */
+.icon-btn {
+    background: white;
+    border: none;
+    padding: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+/* Sidebar (hidden by default, slides in when active) */
+#sidebar {
+    position: fixed;
+    left: -300px;
+    top: 0;
+    width: 300px;
+    height: 100%;
+    background: white;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+    padding: 20px;
+    transition: left 0.3s ease-in-out;
+    overflow-y: auto;
+    z-index: 1001;
+}
+
+/* Sidebar list style */
+#sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar ul li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Show sidebar when open */
+#sidebar.open {
+    left: 0;
+    background: white;
+}
+
+/* Sidebar title */
+#sidebar-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+/* Close button inside sidebar */
+#close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+/* Position the info button at the bottom right */
+.info-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 15px; /* defines the space inside the button between its content (e.g., text or icon) and its border. */
+    font-size: 18px;
+    background-color: #25303b;
+    color: white;
+    border: none;
+    border-radius: 30%;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  
+  /* Modal specific styling
+  .info-modal {
+    display: none; /* Initially hidden 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%; /* Adjust this to your preference 
+    max-width: 600px; /* Adjust this to your preference 
+    background: white;
+    height: auto;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    z-index: 1000; /* Ensure it's above other content 
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+  } */
+
+  /* #info-modal.modal.show {
+    display: block; /* Show modal when 'show' class is added 
+} */
+  
+  /* Modal content (includes slides)
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Overflow happens when the content in an element box extends past one or more of the box's edges
+  } */
+
+  /* Slide container styling
+  /* .slide-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    max-width: 1200px; /* Optional: Limit the max width 
+    width: 80%;
+    margin: 0 auto; /* Centers the container 
+  } */ 
+
+  /* Slide styling */
+  /* .slide {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px;
+    padding: 20px;
+    box-sizing: border-box;
+  } */
+
+  .text {
+    flex: 1;
+    padding-right: 20px;
+  }
+
+  .text .slide-title {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+
+  .text .slide-body {
+    font-size: 1.2em;
+  }
+
+  .image {
+    width: 40%;
+    text-align: center;
+  }
+
+  .image img {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Active slide display
+  .slide.active {
+    display: block;
+  } */
+
+  /* Title and body
+  .slide-title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+
+  .slide-body {
+    font-size: 1em;
+    line-height: 1.5;
+    margin-bottom: 20px;
+  } */
+  
+  /* Buttons */
+  .next-btn, .exit-btn {
+    display: block; /* Hide by default */
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .exit-btn {
+    background-color: #3b465a;
+    right: 120px
+  }
+  
+  .next-btn:hover, .exit-btn:hover {
+    opacity: 0.8;
+    background-color: #45a049;
+    transform: scale(1.05); /* Subtle enlargement */
+  }
+
+  /* Dots (pagination)
+  .dot-container {
+    position: absolute;
+    bottom: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  } */
+
+  /* .dot {
+  height: 12px;
+  width: 12px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  } */
+
+/* .active-dot {
+  background-color: #717171;
+} */
+  

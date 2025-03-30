@@ -3,21 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deza Travel Map</title>
-    
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    
-    <!-- Link to your style.css file -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- Map Container -->
-    <div id="mapid" style="height: 600px;"></div>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Deza Travel Map - Home</title>
+        <!-- Agregar Tailwind CSS desde el CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Neausa:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .gradient { 
+            background: linear-gradient(90deg, #d53369 0%, #daae61 100%)
+        }
+        body {
+            font-family: 'Neausa', sans-serif;
+            background: linear-gradient(to right, #a3bbae 0%, #a3bbae 100%);
+        }
+        input::placeholder {
+            white-space: pre-line;
+        }
 
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-    <!-- Your custom JavaScript file -->
-    <script src="main.js"></script>
+        /* Make sure this is targeting your input */
+        input {
+            max-width: 100%; 
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    </style>
+</head>
+<body class="bg-gray-300">
+
+    <header class="flex justify-between items-center p-6 bg-transparent">
+         <!-- Left side with "Visit Iceland" -->
+         <div class="text-black ml-[3.25in]">
+            <p class="text-sm font-bold">Visit</p>
+            <p class="text-4xl font-bold">Deza</p>
+        </div>  
+
+            <!-- Top center with dropdown menu -->
+            <nav class="flex space-x-6 text-black ml-1">
+                <!-- ABOUT DEZA Dropdown -->
+                <div class="relative group">
+                    <button class="px-4 py-2 text-sm">ABOUT DEZA
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline-block ml-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div class="absolute left-0 hidden mt-1 w-60 min-w-max bg-white p-4 border border-gray-200 shadow-lg text-left group-hover:block font-family:Neausa z-50">
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">Safetravel</a>
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">Visa Information</a>
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">Geography of Deza</a>
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">General Information</a>
+                    </div>       
+                </div>
+                
+                <!-- PLAN YOUR TRIP Dropdown -->
+                <div class="relative group">
+                    <button class="px-4 py-2 text-sm">PLAN YOUR TRIP
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline-block ml-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                    <div class="absolute left-0 hidden mt-1 w-60 min-w-max bg-white p-4 border border-gray-200 shadow-lg text-left group-hover:block font-family:Neausa z-50">
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">How to Get There</a>
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">Accommodation</a>
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">Things To Do</a>
+                        <a href="map.html" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">Map Your Journey</a>
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">Getting Around</a>
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">Visitor Numbers</a>
+                    </div>                
+                </div>
+
+                <!-- DESTINATIONS Dropdown -->               
+                <div class="relative group">
+                    <button class="px-4 py-2 text-sm">DESTINATIONS
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline-block ml-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                </button>
+                    <div class="absolute left-0 hidden mt-1 w-60 min-w-max bg-white p-4 border border-gray-200 shadow-lg text-left group-hover:block font-family:Neausa z-50">
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">The Regions</a>
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">Scenic Routes</a>
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">National Parks</a>
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">Trip Suggestions</a>
+                        <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 pl-2">Towns & Villages</a>
+                    </div>
+                </div>
+
+                <!-- INSPIRATION Dropdown -->               
+                <div class="relative group">
+                    <button class="px-4 py-2 text-sm">INSPIRATION
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 inline-block ml-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+            <div class="absolute left-0 hidden mt-1 w-60 min-w-max bg-white p-4 border border-gray-200 shadow-lg text-left group-hover:block font-family:Neausa z-50">
+                <a href="/pages/food-and-beverages.html" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">Foods & Beverages</a>
+                <a href="/pages/adventure.html" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">Adventure</a>
+                <a href="/pages/culture.html" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">Culture</a>
+                <a href="/pages/wellness.html" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">Wellness</a>
+                <a href="/pages/sustainable-travel.html" class="block px-4 py-2 text-sm hover:bg-gray-100 border-b border-gray-200 pl-2">Sustainable Travel</a>
+                <a href="#" class="block px-4 py-2 text-sm hover:bg-gray-100 pl-2">Events</a>
+            </div>                    
+                </div>
+            </nav>
+            
+     <!-- Top right corner dropdown for language selection -->
+     <div>
+        <select class="px-4 py-2 text-sm bg-transparent text-black">
+            <option>EN</option>
+            <option>ES</option>
+            <option>DE</option>
+        </select>
+    </div>
+    </header>
+
+    <section class="h-screen flex relative justify-between">
+        <!-- Left half with text -->
+        <div class="w-1/2 flex flex-col justify-start items-start p-10 pt-20 text-left ml-[3in]">
+            <div class="text-white text-9xl font-bold animate-pulse duration-500 ease-in-out">
+            <p class="uppercase">EXPLORE</p>
+            <p class="uppercase">DEZA</p>
+        </div>
+
+
+        <!-- Text block for description -->
+        <div class="mt-4 text-white text-2xl w-3/4 text-left pt-20 leading-relaxed">
+            <p>Are you ready to explore O Deza? <br>
+            Our interactive map will help you plan the perfect trip from A-Ö!
+            Discover the best sights, activities, and restaurants along your personalized route with just a few clicks.</p>
+        </div>
+
+         <!-- Button with style and right arrow icon -->
+        <div class="mt-6 pt-5">
+            <a href="map.html" class="inline-flex items-center px-6 py-3 uppercase text-sm font-bold text-black border border-black border-[0.05px] bg-white hover:bg-gray-700 hover:text-white rounded-md">
+                Plan my trip
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 5a1 1 0 011.707-.707l5 5a1 1 0 010 1.414l-5 5A1 1 0 0110 15V5z" clip-rule="evenodd" />
+                </svg>
+            </a>
+        </div>
+        </div>
+    </div>
+    
+        <!-- Right half with background image -->
+        <div class="w-1/2 h-screen bg-cover bg-right bg-no-repeat" style="background-image: url('miniatura mapa.jpg');">
+            </div>
+  
+    </section>
+
+    <footer class="text-center py-6">
+        <p>© 2025 Deza Travel</p>
+    </footer>
+
 </body>
 </html>

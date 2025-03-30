@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TatukGIS>
+  <Viewer>
+    <IncrementalPaint>NO</IncrementalPaint>
+    <VisibleExtent>
+      <XMin>327314.142474085</XMin>
+      <XMax>829668.382825915</XMax>
+      <YMin>4607787.96731054</YMin>
+      <YMax>4875846.05268947</YMax>
+    </VisibleExtent>
+    <CS>
+      <EPSG>3041</EPSG>
+    </CS>
+  </Viewer>
+  <Layers>
+    <Layer Name="Comarcas_LimiteInterior" Path="Comarcas_LimiteInterior.shp">
+      <Sections>
+        <Section>
+          <Visible>YES</Visible>
+          <Ground>OnDem</Ground>
+          <Render>
+            <MinVal>0</MinVal>
+            <MaxVal>0</MaxVal>
+            <MinValEx>0</MinValEx>
+            <MaxValEx>0</MaxValEx>
+          </Render>
+          <Line>
+            <Width>SIZE:1 pt</Width>
+            <Color>ARGB:FF646AB0</Color>
+            <ShowLegend>YES</ShowLegend>
+          </Line>
+          <Active>YES</Active>
+          <Caption>Comarcas_LimiteInterior</Caption>
+        </Section>
+      </Sections>
+    </Layer>
+  </Layers>
+  <EDT_VWR/>
+  <Hierarchy>
+    <Groups/>
+  </Hierarchy>
+</TatukGIS>

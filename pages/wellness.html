@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspiration - Adventure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white p-6">
+<header></header>  <!-- This will be replaced by header.html -->
+<main>
+    <div class="max-w-6xl mx-auto">
+        <div class="flex justify-start mt-16">
+            <div class="w-2/3">
+                <h2 class="text-4xl font-bold mb-6 text-gray-800 mt-16 font-family: 'Segoe UI', sans-serif;">WELLNESS IN DEZA</h2>
+                    <p class="text-2xl font-family: 'Neausa', sans-serif; mb-6 text-gray-800 mt-4">Recharge your mind, body, and soul in Iceland’s stunning landscapes and natural wonders. From yoga and hiking to world-class spas, wellness experiences here harness the sustainable power of geothermal, mineral-rich waters. Discover the ultimate retreat for relaxation and rejuvenation in this land of wellness.</p>
+                </div>
+            </div>
+            <!-- Add margin-top for 1 inch space -->
+            <div class="grid grid-cols-1 gap-6 mt-16 mb-32" id="activityGrid"></div>
+        </div>
+    </main>
+<footer></footer>  <!-- This will be replaced by footer.html -->
+<script>
+
+        // Load the header.html file dynamically
+        fetch('../partials/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.querySelector('header').innerHTML = data;
+        });
+
+            // Load the footer.html file dynamically
+        fetch('../partials/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.querySelector('footer').innerHTML = data;
+        });
+
+    const activities = [
+        { title: "RELAXING SPA AND POOL RETREATS IN LALIN AND SILLEDA", description: "These two hotels offer a comprehensive wellness experience with dynamic pools, saunas, Turkish baths, contrast showers, and a range of hydrotherapy treatments. Guests can enjoy relaxing Jacuzzis, steam rooms, and therapeutic massages, including volcanic stone and anti-stress options. Additional services include body wraps, exfoliations, and hydration treatments, all designed to rejuvenate and relax the body and mind..", image: "../images/TORRE.jpg" },
+        { title: "SPA WITH A THERMAL CIRCUIT", description: "This spa's wellness circuit, with its sulfurated, chlorinated sodium, bicarbonated, and alkaline waters, features a variety of soothing treatments, including an active pool with swan necks and underwater jets, a Turkish bath, contrast therapy, and a phlebotherapy corridor. It also offers a polar breath application, bubble or hydromassage baths, a steam room to relax muscles and improve respiration, and tonifying water jets. Guests can unwind in a relaxation area with antioxidant tea.", image: "../images/balneario brea.jpg" },
+        { title: "RELAX, PAMPER & REVITALIZE", description: "Indulge in the ultimate self-care experience with top-tier wellness and beauty services in the area. From expert hair styling and flawless nails to rejuvenating massages and luxurious treatments, you’ll find everything you need to look and feel your best. Treat yourself today and book an appointment for pure relaxation and beauty!", image: "../images/ELVIRA.jpg" },
+        { title: "HIKING DEZA", description: "Walking and hiking through Deza's lush landscapes is a fantastic way to experience the county's extraordinary nature, especially during the long summer days or in the autumn, when you can enjoy the colorful brown hues. You'll find various hiking routes around Deza, each offering its own natural gems..", image: "../images/CATASOS 3.jpg" },
+        { title: "SWIMMING FOR ALL AGES", description: "Dive into fitness and fun at the city gym and pool complex! Enjoy a large swimming pool for adults, a dedicated kids' pool, and a relaxing spa with dynamic circuits, a sauna, and a Turkish bath. Plus, stay active in the fully equipped gym. There's something for everyone—come make a splash!", image: "../images/piscina.jpg" }
+    ];
+    
+    //code dynamically creates and inserts activity cards into the #activityGrid div
+    const grid = document.getElementById("activityGrid"); //Finds the HTML element with the ID activityGrid, which is where the activity cards will be placed.
+    activities.forEach(activity => { //Iterates over the activities array, where each object contains a title, description, and image.
+        const card = document.createElement("div"); //Creates a new <div> element to serve as the card container.
+        card.classList.add("flex", "items-start", "hover:shadow-lg", "transition", "duration-300", "p-4"); //Applies Tailwind CSS classes to style the card with a white background, rounded corners, shadows, and a hover effect.
+        card.innerHTML = `
+            <img src="${activity.image}" alt="${activity.title}" class="w-96 h-64 rounded object-cover mr-8">
+            <div class="p-4">
+                <h3 class="text-3xl font-bold text-gray-900">${activity.title}</h3>
+                <p class="text-xl text-gray-800 text-sm mt-2">${activity.description}</p>
+            </div>
+        `;
+        grid.appendChild(card); //Inserts the newly created card inside the #activityGrid div, displaying it on the page.
+    });
+</script>
+</body>
+</html>

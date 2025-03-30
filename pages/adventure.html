@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspiration - Adventure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white p-6">
+<header></header>  <!-- This will be replaced by header.html -->
+<main>
+    <div class="max-w-6xl mx-auto">
+        <div class="flex justify-start mt-16">
+            <div class="w-2/3">
+                <h2 class="text-4xl font-bold mb-6 text-gray-800 mt-16 font-family: 'Segoe UI', sans-serif;">THE OUTDOOR ENTHUSIAST'S PARADISE</h2>
+                    <p class="text-2xl font-family: 'Neausa', sans-serif; mb-6 text-gray-800 mt-4">Every day, there is an adventure waiting to happen in Deza. With its abundance of valleys, green spaces, rivers, and forests waiting to be tackled, Deza is truly an outdoor enthusiast's paradise. But, it is also a warm and welcoming place for the rest of us.
+                    <br> - Check out some of the activites available in Deza.</p>
+                </div>
+            </div>
+            <!-- Add margin-top for 1 inch space -->
+            <div class="grid grid-cols-1 gap-6 mt-16 mb-32" id="activityGrid"></div>
+        </div>
+    </main>
+<footer></footer>  <!-- This will be replaced by footer.html -->
+<script>
+
+        // Load the header.html file dynamically
+        fetch('../partials/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.querySelector('header').innerHTML = data;
+        });
+
+            // Load the footer.html file dynamically
+        fetch('../partials/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.querySelector('footer').innerHTML = data;
+        });
+
+    const activities = [
+        { title: "HIKING TRAILS", description: "Hiking in Deza is a breathtaking experience, where lush green valleys, expansive forests, and wide-open spaces await. The trails wind through pristine nature, offering panoramic views of rolling hills and tranquil rivers. The fresh, crisp air and serene surroundings make it a peaceful escape.", image: "../images/candan.jpg" },
+        { title: "RAFTING AND KAYAKING", description: "Kayaking and rafting in the Deza region offer an adventurous way to explore its serene rivers and vibrant landscapes. Paddle through clear waters, surrounded by dense forests and rolling hills, while enjoying the peaceful rhythm of nature. The region's natural beauty provides a perfect backdrop for both thrilling rapids and quiet, reflective moments on the water.", image: "../images/rafting cruces.jpg" },
+        { title: "BIKING AND MOUNTAIN BIKING", description: "Ride along scenic trails that wind through dense forests, rolling hills, and rugged mountain paths. Whether you're seeking a leisurely ride or an adrenaline-packed challenge, the landscape offers something for every level of rider. The region’s natural beauty and fresh air make it an ideal destination for outdoor enthusiasts.", image: "../images/bici.jpg" },
+        { title: "HORSES OF DEZA", description: "Horse riding is a great way to explore unspoiled nature, offering stunning views of the panoramic landscapes and grazing sheep. Riding tours are provided throughout Deza by a few equestrian centers.", image: "../images/ruta caballo.jpg" }
+    ];
+    
+    //code dynamically creates and inserts activity cards into the #activityGrid div
+    const grid = document.getElementById("activityGrid"); //Finds the HTML element with the ID activityGrid, which is where the activity cards will be placed.
+    activities.forEach(activity => { //Iterates over the activities array, where each object contains a title, description, and image.
+        const card = document.createElement("div"); //Creates a new <div> element to serve as the card container.
+        card.classList.add("flex", "items-start", "hover:shadow-lg", "transition", "duration-300", "p-4"); //Applies Tailwind CSS classes to style the card with a white background, rounded corners, shadows, and a hover effect.
+        card.innerHTML = `
+            <img src="${activity.image}" alt="${activity.title}" class="w-96 h-64 rounded object-cover mr-8">
+            <div class="p-4">
+                <h3 class="text-3xl font-bold text-gray-900">${activity.title}</h3>
+                <p class="text-xl text-gray-800 text-sm mt-2">${activity.description}</p>
+            </div>
+        `;
+        grid.appendChild(card); //Inserts the newly created card inside the #activityGrid div, displaying it on the page.
+    });
+</script>
+</body>
+</html>

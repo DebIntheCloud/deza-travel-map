@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Deza Travel Map</title>
+
+    <!-- Include Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Include Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+
+    <!-- Include the Geocoder CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
+    <!-- Mapbox Geocoding API -->
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css" rel="stylesheet" />
+
+    <!-- Include Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <!-- Include Leaflet Geocoder JS -->
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+    <!-- Include FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <!-- Link to your style.css file -->
+    <link rel="stylesheet" href="style.css">    
+</head>
+<body class="font-family:Neausa, sans-serif">
+
+    <!-- Map Container -->
+    <div id="mapid" style="height: 800px;"></div>
+
+    <!-- Icons top right -->
+    <div id="icon-container" class="absolute top-4 right-4 flex flex-row space-y-2">
+        <button class="icon-btn p-2 bg-white rounded-full shadow-md" data-category="art"><i class="fas fa-palette text-xl"></i></button>
+        <button class="icon-btn p-2 bg-white rounded-full shadow-md" data-category="accommodation"><i class="fas fa-bed text-xl"></i></button>
+        <button class="icon-btn p-2 bg-white rounded-full shadow-md" data-category="transport"><i class="fas fa-car text-xl"></i></button>
+        <button class="icon-btn p-2 bg-white rounded-full shadow-md" data-category="recreation"><i class="fas fa-person-hiking text-xl"></i></button>
+        <button class="icon-btn p-2 bg-white rounded-full shadow-md" data-category="dining"><i class="fas fa-utensils text-xl"></i></button>
+    </div>
+    
+    <!-- Sidebar -->
+    <div id="sidebar">
+
+        <button id="close-btn">&times;</button>
+        <h2 id="sidebar-title">Filter by Category</h2>
+        <ul id="sidebar-content">
+            <li><button data-category="art">Art</button></li>
+            <li><button data-category="accommodation">Accommodation</button></li>
+            <li><button data-category="transport">Transport</button></li>
+            <li><button data-category="recreation">Recreation</button></li>
+            <li><button data-category="dining">Dining</button></li>
+        </ul>
+    </div>
+
+    <!-- Info Button -->
+    <button id="info-btn" class="info-btn">i</button>
+
+    <!-- Modal for instructions leaving commented in case the other code does not work!! --> 
+    <div id="info-modal" class="info-modal inset-0 flex items-center" style="display: none;">
+    <div class="bg-white p-6 rounded-lg max-w-3xl w-11/12 max-h-[80vh] overflow-y-auto relative">
+        <!-- Image -->
+        <img id="instruction-image" src="" alt="Slide Image" class="w-full max-h-[50vh] h-auto object-contain rounded-lg mb-4">
+        <!-- Title -->
+        <h2 id="instruction-title" class="text-xl font-bold text-center mb-2"></h2>
+
+        <!-- Paragraph -->
+    <p id="instruction-text" class="text-center"></p>
+        <button id="next-btn" class="next-btn bg-gray-800 text-white px-4 py-2 rounded">NEXT</button>
+        <button id="exit-btn" class="exit-btn bg-gray-800 text-white px-4 py-2 rounded" style="display:none;">EXIT</button>
+    </div>
+    </div>
+
+    <div id="info-modal" class="modal" style="display: none;">
+        <div class="slide-container">
+            <!-- Slides will be dynamically added here by JavaScript -->
+        </div>
+         
+    <!-- Indicator Circles -->
+    <div class="dots">
+    <span class="dot active" onclick="goToSlide(0)"></span>
+    <span class="dot" onclick="goToSlide(1)"></span>
+    <span class="dot" onclick="goToSlide(2)"></span>
+    <span class="dot" onclick="goToSlide(3)"></span>
+    </div>
+
+    <!-- Buttons -->
+    <button id="next-btn" class="next-btn">NEXT</button>
+    <button id="exit-btn" class="exit-btn" style="display:none;">EXIT</button>
+    </div>
+
+
+    
+    <!-- Leaflet Google Mutant Layer.This script allows you to use Google Maps tiles (such as Satellite, Street, etc.) in conjunction with Leaflet  -->
+    <script src="https://unpkg.com/leaflet.gridlayer.googlemutant@latest/Leaflet.GoogleMutant.js"></script>
+    
+    <!-- Your custom JavaScript file -->
+    <script src="main.js"></script>
+
+    <div id="searchContainer">
+        <i id="markerIcon" class="fa fa-map-marker-alt"></i> <!-- FontAwesome marker icon -->
+        <input type="text" id="searchInput" placeholder="Add stop" />
+    </div>
+    
+    <script>
+        var map;
+
+        // Initialize the map
+        function initMap() {
+            map = L.map('mapid').setView([42.5, -8.0], 13); // Default coordinates for Deza area
+
+            // Add OpenStreetMap tile layer
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+         }
+
+        // Initialize the map and autocomplete object
+        function initAutocomplete() {
+        // Placeholder for autocomplete functionality, to be implemented if required
+        }
+
+        // Wait for the page to load
+        window.onload = function() {
+            initMap();
+        };
+
+        // Sidebar functionality to open and close
+        const closeBtn = document.getElementById('close-btn');
+        const sidebar = document.getElementById('sidebar');
+
+        // Open sidebar on category button click
+        document.querySelectorAll('.icon-btn').forEach((btn) => {
+            btn.addEventListener('click', () => {
+                const category = btn.getAttribute('data-category');
+                // Your logic to filter items by category here
+                console.log('Filter by category:', category);
+                sidebar.style.display = 'block'; // Show the sidebar
+            });
+        });
+
+        // Close the sidebar when the close button is clicked
+        closeBtn.addEventListener('click', () => {
+            sidebar.style.display = 'none';
+        });
+    </script>
+    
+</body>
+</html>
+

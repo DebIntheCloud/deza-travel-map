@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspiration - Sustainability</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white p-6">
+<header></header>  <!-- This will be replaced by header.html -->
+<main>
+    <div class="max-w-6xl mx-auto">
+        <div class="flex justify-start mt-16">
+            <div class="w-2/3">
+                <h2 class="text-4xl font-bold mb-6 text-gray-800 mt-16 font-family: 'Segoe UI', sans-serif;">SUSTAINABLE TRAVEL IN DEZA</h2>
+                    <p class="text-2xl font-family: 'Neausa', sans-serif; mb-6 text-gray-800 mt-4">Galicia's nature is fragile, as are its rural communities and economy. Tourism is a fast-growing industry in Iceland, so it's crucial to encourage sustainable travel. Therefore, sustainability is serious, but it doesn't mean we must stop doing fun things or enjoying life while traveling.</p>
+                </div>
+            </div>
+            <!-- Add margin-top for 1 inch space -->
+            <div class="grid grid-cols-1 gap-6 mt-16 mb-32" id="activityGrid"></div>
+        </div>
+    </main>
+<footer></footer>  <!-- This will be replaced by footer.html -->
+<script>
+
+        // Load the header.html file dynamically
+        fetch('../partials/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.querySelector('header').innerHTML = data;
+        });
+
+            // Load the footer.html file dynamically
+        fetch('../partials/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.querySelector('footer').innerHTML = data;
+        });
+
+    const activities = [
+        { title: "SUSTAINABILITY TRAVEL TIPS", description: "One of the best ways to visit Deza, Galicia, is with sustainability in mind. Use public transportation or electric vehicles to reduce your carbon footprint while exploring. Stick to marked trails and avoid disturbing protected areas, like the Galician Rías. Support local businesses by shopping locally, dining at eco-friendly spots, and staying in sustainable accommodations.", image: "../images/sustainability.jpg" },
+        { title: "DISCOVER YOUR FARMER, KNOW YOUR FOOD", description: "O Alle, a certified organic dairy farm in Lalín, Pontevedra, offers fresh, raw milk produced with care for both animals and the environment. Run by Antonio Carral and his wife Bety González, the farm prioritizes sustainable practices, with cows grazing on fresh pastures year-round. The milk, rich in beneficial bacteria and enzymes, is processed with minimal contact to preserve its quality. O Alle exemplifies a shift from intensive farming to eco-friendly methods, offering consumers healthy, sustainable dairy products and a direct connection to the source of their food.", image: "../images/oalle2.jpg" },
+        { title: "CAMINO DE SANTIAGO: AN ECO-FRIENDLY JOURNEY THROUGH SPAIN ", description: "an eco-friendly journey through Spain, combining nature, culture, and history. This ancient pilgrimage route, recognized as a UNESCO World Heritage site, invites travelers to walk or cycle while promoting sustainability. The initiative Camino Sostenible encourages responsible travel through local products and sustainable practices. With various routes to explore, the Camino provides an unforgettable experience surrounded by beautiful landscapes, historic sites, and vibrant local culture.", image: "../images/CAMINO.jpg" },
+        { title: "PIONEERING ORGANIC DEHYDRATED FOODS", description: "Trasdeza Natur specializes in organic dehydrated fruits and vegetables like apple, kiwi, tomato, and garlic. The cooperative has gained recognition with awards such as the 2023 BBVA and Celler Can Roca prize for sustainable producers. Their products are enjoyed by athletes, families, and renowned chefs, offering a convenient, healthy option with preserved nutritional properties. They also innovate with solar-powered dehydration techniques, aligning with Galicia's rich agricultural tradition and commitment to sustainability.", image: "../images/trasdeza natur.jpg" }
+    ];
+    
+    //code dynamically creates and inserts activity cards into the #activityGrid div
+    const grid = document.getElementById("activityGrid"); //Finds the HTML element with the ID activityGrid, which is where the activity cards will be placed.
+    activities.forEach(activity => { //Iterates over the activities array, where each object contains a title, description, and image.
+        const card = document.createElement("div"); //Creates a new <div> element to serve as the card container.
+        card.classList.add("flex", "items-start", "hover:shadow-lg", "transition", "duration-300", "p-4"); //Applies Tailwind CSS classes to style the card with a white background, rounded corners, shadows, and a hover effect.
+        card.innerHTML = `
+            <img src="${activity.image}" alt="${activity.title}" class="w-96 h-64 rounded object-cover mr-8">
+            <div class="p-4">
+                <h3 class="text-3xl font-bold text-gray-900">${activity.title}</h3>
+                <p class="text-xl text-gray-800 text-sm mt-2">${activity.description}</p>
+            </div>
+        `;
+        grid.appendChild(card); //Inserts the newly created card inside the #activityGrid div, displaying it on the page.
+    });
+</script>
+</body>
+</html>

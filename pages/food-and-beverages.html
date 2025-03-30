@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspiration - Food and drink</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white p-6">
+<header></header>  <!-- This will be replaced by header.html -->
+<main>
+    <div class="max-w-6xl mx-auto">
+        <div class="flex justify-start mt-16">
+            <div class="w-2/3">
+                <h2 class="text-4xl font-bold mb-6 text-gray-800 mt-16 font-family: 'Segoe UI', sans-serif;">THE FOOD DESTINATION DEZA</h2>
+                    <p class="text-2xl font-family: 'Neausa', sans-serif; mb-6 text-gray-800 mt-4">The Deza region, known for its rich Galician heritage, is a fantastic gastronomic destination, offering a variety of exciting flavors rooted in tradition. A highlight of Galician cuisine is its fresh, high-quality seafood, with locally caught fish and shellfish taking center stage. The region is also renowned for its exceptional meats, paired with the finest fresh produce, creating dishes that reflect both the land and sea.</p>
+                </div>
+            </div>
+            <!-- Add margin-top for 1 inch space -->
+            <div class="grid grid-cols-1 gap-6 mt-16 mb-32" id="activityGrid"></div>
+        </div>
+    </main>
+<footer></footer>  <!-- This will be replaced by footer.html -->
+<script>
+
+        // Load the header.html file dynamically
+        fetch('../partials/header.html')
+        .then(response => response.text())
+        .then(data => {
+            document.querySelector('header').innerHTML = data;
+        });
+
+            // Load the footer.html file dynamically
+        fetch('../partials/footer.html')
+        .then(response => response.text())
+        .then(data => {
+            document.querySelector('footer').innerHTML = data;
+        });
+
+    const activities = [
+        { title: "8 PLACES OF CHARACTER AND CHARM TO EAT FOR EVERY CORNER IN DEZA", description: "Atmospheric eateries, located across Deza, that can at least claim to wear and tear Michelin tires", image: "../images/pazo bendoiro pulpo.jpg" },
+        { title: "DEZA BAKERY GUIDE", description: "Discover the sweet delights of the Deza region with our bakery guide, featuring traditional treats like brevas and almond cake, as well as buttery croissants, and rich pan au chocolat. Don’t miss the marzipan delicacies that come alive during Christmas or the festive orellas and cañas enjoyed during Carnival time. From classic pastries to seasonal specialties, Deza's bakeries offer something for every sweet tooth.", image: "../images/canas crema.jpg" },
+        { title: "DIY: DARE TO TRY TO MAKE THE FAMOUS COCIDO DE LALIN?", description: "Get ready to bring the flavors of Deza into your kitchen! In this article, we'll guide you through the steps to create the iconic Cocido de Lalín, with expert tips and a video to help you master this delicious Galician dish.", image: "../images/cocido.jpg" },
+        { title: "COCKTAILS, WINE AND SPIRITS", description: "Experience exceptional cocktails at an award-winning bar, renowned for its expertly crafted drinks. Enjoy a wide selection of wines, with the option to indulge in a personalized wine tasting experience. Pair your drinks with classic spirits like Licor Café and Crema de Orujo for a truly memorable visit.", image: "../images/kubos.jpg" }
+    ];
+    
+    //code dynamically creates and inserts activity cards into the #activityGrid div
+    const grid = document.getElementById("activityGrid"); //Finds the HTML element with the ID activityGrid, which is where the activity cards will be placed.
+    activities.forEach(activity => { //Iterates over the activities array, where each object contains a title, description, and image.
+        const card = document.createElement("div"); //Creates a new <div> element to serve as the card container.
+        card.classList.add("flex", "items-start", "hover:shadow-lg", "transition", "duration-300", "p-4"); //Applies Tailwind CSS classes to style the card with a white background, rounded corners, shadows, and a hover effect.
+        card.innerHTML = `
+            <img src="${activity.image}" alt="${activity.title}" class="w-96 h-64 rounded object-cover mr-8">
+            <div class="p-4">
+                <h3 class="text-3xl font-bold text-gray-900">${activity.title}</h3>
+                <p class="text-xl text-gray-800 text-sm mt-2">${activity.description}</p>
+            </div>
+        `;
+        grid.appendChild(card); //Inserts the newly created card inside the #activityGrid div, displaying it on the page.
+    });
+</script>
+</body>
+</html>
